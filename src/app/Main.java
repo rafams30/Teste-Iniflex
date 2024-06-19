@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -24,8 +23,17 @@ public class Main {
         funcionarios.add(new Funcionario("Heloísa", LocalDate.of(2003, 5, 24), new BigDecimal(1606.85).setScale(2, RoundingMode.HALF_EVEN), "Eletricista"));
         funcionarios.add(new Funcionario("Helena", LocalDate.of(1996, 9, 2), new BigDecimal(2799.93).setScale(2, RoundingMode.HALF_EVEN), "Gerente"));
 
+        System.out.println("Lista Funcionarios:");
         for (Funcionario f : funcionarios) {
             System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc() + "," +  " Salario:" + f.getSalario() + "," + " Função:" + f.getFuncao());
+        }
+
+        System.out.println();
+        System.out.println("Lista Funcionarios Sem o João:");
+        for (Funcionario f : funcionarios) {
+            if (f.getName() != "João") {
+                System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc() + "," + " Salario:" + f.getSalario() + "," + " Função:" + f.getFuncao());
+            }
         }
     }
 }
