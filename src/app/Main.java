@@ -4,7 +4,9 @@ import entities.Funcionario;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +37,15 @@ public class Main {
                 System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc() + "," + " Salario:" + f.getSalario() + "," + " Função:" + f.getFuncao());
             }
         }
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DecimalFormat df = new DecimalFormat("#,###.00");
+
+        System.out.println("Lista Funcionarios com a Data e Salarios Formatados:");
+        for (Funcionario f : funcionarios) {
+            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc().format(fmt) + "," +  " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao());
+        }
+
+
     }
 }
