@@ -41,11 +41,20 @@ public class Main {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DecimalFormat df = new DecimalFormat("#,###.00");
 
+        System.out.println();
         System.out.println("Lista Funcionarios com a Data e Salarios Formatados:");
         for (Funcionario f : funcionarios) {
             System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc().format(fmt) + "," +  " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao());
         }
 
+        System.out.println();
+        System.out.println("Lista Funcionarios com Salarios aumentados em 10%:");
+        for (Funcionario f : funcionarios) {
+            BigDecimal salario = (f.getSalario());
+            BigDecimal novoSalario = salario.multiply(new BigDecimal("0.10"));
+            f.setSalario(salario.add(novoSalario));
+            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc().format(fmt) + "," +  " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao());
 
+        }
     }
 }
