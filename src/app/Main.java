@@ -8,7 +8,9 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,11 +33,10 @@ public class Main {
         }
 
         System.out.println();
-        System.out.println("Lista Funcionarios Sem o João:");
+        System.out.println("Remover João da lista de Funcionarios :");
+        funcionarios.removeIf(x -> x.getName() == "João");
         for (Funcionario f : funcionarios) {
-            if (f.getName() != "João") {
-                System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc() + "," + " Salario:" + f.getSalario() + "," + " Função:" + f.getFuncao());
-            }
+            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc() + "," + " Salario:" + f.getSalario() + "," + " Função:" + f.getFuncao());
         }
 
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -51,10 +52,30 @@ public class Main {
         System.out.println("Lista Funcionarios com Salarios aumentados em 10%:");
         for (Funcionario f : funcionarios) {
             BigDecimal salario = (f.getSalario());
-            BigDecimal novoSalario = salario.multiply(new BigDecimal("0.10"));
-            f.setSalario(salario.add(novoSalario));
+            BigDecimal porcetagem = salario.multiply(new BigDecimal("0.10"));
+            f.setSalario(salario.add(porcetagem));
             System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc().format(fmt) + "," +  " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao());
+        }
 
+        System.out.println();
+
+        Map<String, List<Funcionario>> mapFuncionarios = new HashMap<>();
+
+        for (Funcionario funcionario : funcionarios) {
+            String funcao = funcionario.getFuncao();
+
+            mapFuncionarios.computeIfAbsent(funcao, k -> new ArrayList<>()).add(funcionario);
+        }
+
+        for (Map.Entry<String , List<Funcionario>> entry : mapFuncionarios.entrySet()) {
+            String funcao = entry.getKey();
+            List<Funcionario> funcaoDoFuncionario = entry.getValue();
+
+            System.out.println("Função: " + funcao);
+
+            for (Funcionario funcionario : funcaoDoFuncionario) {
+                System.out.println(" -" + funcionario);
+            }
         }
     }
 }

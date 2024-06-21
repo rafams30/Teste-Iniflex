@@ -27,4 +27,12 @@ public class Pessoa {
     public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "name='" + name + '\'' +
+                ", dataNasc=" + dataNasc +
+                '}';
+    }
 }
