@@ -1,16 +1,14 @@
 package app;
 
 import entities.Funcionario;
+import entities.Pessoa;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -77,5 +75,46 @@ public class Main {
                 System.out.println(" -" + funcionario);
             }
         }
-    }
+
+        System.out.println();
+        System.out.println("Funcionarios que fazem aniversario entre o mês 10 e 12:");
+        for (Map.Entry<String , List<Funcionario>> entry : mapFuncionarios.entrySet()) {
+            String funcao = entry.getKey();
+            List<Funcionario> funcaoDoFuncionario = entry.getValue();
+
+            System.out.println("Função: " + funcao);
+
+            for (Funcionario funcionario : funcaoDoFuncionario) {
+                var dataAniversario = funcionario.getDataNasc();
+                var mesAniveario = dataAniversario.getMonth().getValue();
+                if (mesAniveario >= 10 && mesAniveario <= 12 ) {
+                    System.out.println(" -" + funcionario);
+                }
+            }
+        }
+
+        System.out.println();
+        System.out.println("Funcionario com a maior idade:");
+        var nomeFuncionario = "";
+        var anoNascimento = 2024;
+        var idadeFuncionario = 0;
+
+        for (Map.Entry<String , List<Funcionario>> entry : mapFuncionarios.entrySet()) {
+            List<Funcionario> funcaoDoFuncionario = entry.getValue();
+
+            for (Funcionario funcionario : funcaoDoFuncionario) {
+                if (funcionario.getDataNasc().getYear() < anoNascimento) {
+                    nomeFuncionario = funcionario.getName();
+                    anoNascimento = funcionario.getDataNasc().getYear();
+                    idadeFuncionario = 2024 - anoNascimento;
+                }
+            }
+        }
+        System.out.println(nomeFuncionario + ", idade: " +  idadeFuncionario);
+
+        System.out.println();
+        System.out.println("Lista Funcionarios Em ordem Alfabetica:");
+        funcionarios.sort(Comparator.comparing(Funcionario::getName));
+        System.out.println(funcionarios);
+        }
 }
