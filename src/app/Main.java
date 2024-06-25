@@ -27,7 +27,7 @@ public class Main {
 
         System.out.println("Lista Funcionarios:");
         for (Funcionario f : funcionarios) {
-            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc() + "," +  " Salario:" + f.getSalario() + "," + " Função:" + f.getFuncao());
+            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc() + "," + " Salario:" + f.getSalario() + "," + " Função:" + f.getFuncao());
         }
 
         System.out.println();
@@ -43,7 +43,7 @@ public class Main {
         System.out.println();
         System.out.println("Lista Funcionarios com a Data e Salarios Formatados:");
         for (Funcionario f : funcionarios) {
-            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc().format(fmt) + "," +  " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao());
+            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc().format(fmt) + "," + " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao());
         }
 
         System.out.println();
@@ -52,7 +52,7 @@ public class Main {
             BigDecimal salario = (f.getSalario());
             BigDecimal porcetagem = salario.multiply(new BigDecimal("0.10"));
             f.setSalario(salario.add(porcetagem));
-            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc().format(fmt) + "," +  " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao());
+            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc().format(fmt) + "," + " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao());
         }
 
         System.out.println();
@@ -65,7 +65,7 @@ public class Main {
             mapFuncionarios.computeIfAbsent(funcao, k -> new ArrayList<>()).add(funcionario);
         }
 
-        for (Map.Entry<String , List<Funcionario>> entry : mapFuncionarios.entrySet()) {
+        for (Map.Entry<String, List<Funcionario>> entry : mapFuncionarios.entrySet()) {
             String funcao = entry.getKey();
             List<Funcionario> funcaoDoFuncionario = entry.getValue();
 
@@ -78,7 +78,7 @@ public class Main {
 
         System.out.println();
         System.out.println("Funcionarios que fazem aniversario entre o mês 10 e 12:");
-        for (Map.Entry<String , List<Funcionario>> entry : mapFuncionarios.entrySet()) {
+        for (Map.Entry<String, List<Funcionario>> entry : mapFuncionarios.entrySet()) {
             String funcao = entry.getKey();
             List<Funcionario> funcaoDoFuncionario = entry.getValue();
 
@@ -87,7 +87,7 @@ public class Main {
             for (Funcionario funcionario : funcaoDoFuncionario) {
                 var dataAniversario = funcionario.getDataNasc();
                 var mesAniveario = dataAniversario.getMonth().getValue();
-                if (mesAniveario >= 10 && mesAniveario <= 12 ) {
+                if (mesAniveario >= 10 && mesAniveario <= 12) {
                     System.out.println(" -" + funcionario);
                 }
             }
@@ -99,7 +99,7 @@ public class Main {
         var anoNascimento = 2024;
         var idadeFuncionario = 0;
 
-        for (Map.Entry<String , List<Funcionario>> entry : mapFuncionarios.entrySet()) {
+        for (Map.Entry<String, List<Funcionario>> entry : mapFuncionarios.entrySet()) {
             List<Funcionario> funcaoDoFuncionario = entry.getValue();
 
             for (Funcionario funcionario : funcaoDoFuncionario) {
@@ -110,11 +110,21 @@ public class Main {
                 }
             }
         }
-        System.out.println(nomeFuncionario + ", idade: " +  idadeFuncionario);
+        System.out.println(nomeFuncionario + ", idade: " + idadeFuncionario);
 
         System.out.println();
         System.out.println("Lista Funcionarios Em ordem Alfabetica:");
         funcionarios.sort(Comparator.comparing(Funcionario::getName));
-        System.out.println(funcionarios);
+        for (Funcionario f : funcionarios) {
+            System.out.println("Nome:" + f.getName() + "," + " Data de Nascimento:" + f.getDataNasc().format(fmt) + "," + " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao());
         }
+
+        System.out.println();
+        System.out.println("Valor total dos salarios dos funcionarios:");
+        BigDecimal valorTotal = new BigDecimal(0000.00);
+        for (Funcionario f : funcionarios) {
+            valorTotal = f.getSalario().add(valorTotal);
+        }
+        System.out.println(df.format(valorTotal));
+    }
 }
