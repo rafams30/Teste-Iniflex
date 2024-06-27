@@ -126,5 +126,15 @@ public class Main {
             valorTotal = f.getSalario().add(valorTotal);
         }
         System.out.println(df.format(valorTotal));
+
+        System.out.println();
+        System.out.println("Quantos salarios ganham cada funcionario :");
+        for (Funcionario f : funcionarios) {
+            BigDecimal salario = f.getSalario();
+            BigDecimal salarioMin = new BigDecimal("1212.0");
+            BigDecimal qtdSalarioMin = salario.divide(salarioMin, 2, RoundingMode.HALF_EVEN);
+
+            System.out.println("Nome:" + f.getName() + "," + " Salario:" + df.format(f.getSalario()) + "," + " Função:" + f.getFuncao() + "," + " E recebe o equivalente de : " + qtdSalarioMin + " Salarios.");
+        }
     }
 }
